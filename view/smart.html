@@ -95,10 +95,10 @@
         this.itemTop = 212;
         this.itemWidth = 300;
         this.itemHeight = 42;
-        this.itemMoreLeft = 688;
-        this.itemMoreTop = 570;
-        this.itemMoreWidth = 121;
-        this.itemMoreHeight = 24;
+        this.itemMoreLeft = 188;
+        this.itemMoreTop = 565;
+        this.itemMoreWidth = 132;
+        this.itemMoreHeight = 32;
         this.listItemNum = 5;
         this.resourceId = cmsConfig.smartResourceIdArray[6].resourceId;
 
@@ -203,24 +203,33 @@
             this.remove(this.cursor.fileName);
             switch (this.cursor.focusArea) {
                 case 2:         // 列表
-                    params =
-                        {
-                            /**
-                             * 一级页面
-                             */
-                            'PG-ONE': {
-                                focusArea: this.cursor.focusArea,
-                                focusPos: this.cursor.list.focusPos
-                            },
-                            'PG_TEXT': {
-                                resourceId: this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].id,
-                                isShowGraphics: 'show',
-                                backURL: 'service.html',
-                                logoImageSrc: ''
-                            }
+                    params = {
+                        'PG-ONE': {
+                            focusArea: this.cursor.focusArea,
+                            focusPos: this.cursor.list.focusPos
+                        }
+                    };
+                    if (this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].flag === 0) {
+                        params.VIDEO = {
+                            backURL: this.backUrl(),
+                            fileName: this.cursor.fileName,
+                            focusArea: this.cursor.focusArea,
+                            focusPos: this.cursor.list.focusPos,
+                            assertId: this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].assetID
                         };
-                    postfix = this.package(params);
-                    window.location.href = 'detail.html' + postfix;
+                        postfix = this.package(params);
+                        window.location.href = 'video.html' + postfix;
+                    } else {
+                        params.PG_MORE = {
+                            resourceId: cmsConfig.apartmentResourceIdArray[1].resourceId,
+                            resourceType: 'video',
+                            backURL: 'smart.html',
+                            logoImageSrc: '',
+                            pageIndex: 1
+                        };
+                        postfix = this.package(params);
+                        window.location.href = 'more.html' + postfix;
+                    }
                     break;
                 default:
                     break;

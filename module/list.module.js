@@ -34,7 +34,7 @@ function ListModule() {
     this.noticesBoardBarBgSrc = 'url(../images/list/list-item-bar.png) no-repeat';
     this.noticesBoardBarText = '最新动态';
     this.noticesBoardBarColor = '#FFF';
-    this.noticesBoardBarFontSize = '18pt';
+    this.noticesBoardBarFontSize = '20pt';
 
     this.resourceId = '';
 

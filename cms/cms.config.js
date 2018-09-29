@@ -12,8 +12,8 @@ var cmsConfig = {
     backUrl: '',
     index_back_url: '',
     environment: 'DEBUG',
-    //environment: 'PRODUCT',
-    //
+    // environment: 'PRODUCT',
+
     /**
      * 美丽北岸
      */
@@ -23,27 +23,26 @@ var cmsConfig = {
 
 
         // ---------------  海报（播放视频）  ---------------  //
-        {title: '左侧海报', resourceId: '831'},
-        {title: '右下海报', resourceId: '0'},
+        {title: '左侧海报', resourceId: '941'},
+        {title: '右下海报', resourceId: '943'},
 
         // ---------------  滚动页  ---------------  //
-        {title: '右侧滚动页', resourceId: '819'}
+        {title: '右侧滚动页', resourceId: '942'}
     ],
 
     /**
-     * 秀屿新闻
+     * 北岸新闻
      */
     newsResourceIdArray: [
-        {title: '秀屿新闻', resourceId: ''},
+        {title: '北岸新闻', resourceId: ''},
         // ---------------  菜单  ---------------  //
 
         // ---------------  海报（播放视频）  ---------------  //
+        {title: '右上海报', resourceId: '945'},
+        {title: '右下海报', resourceId: '946'},
 
         // ---------------  列表  ---------------  //
-        {title: '最新动态', resourceId: '769'},
-
-        // ---------------  滚动页  ---------------  //
-        {title: '右侧滚动页', resourceId: '855'}
+        {title: '最新动态', resourceId: '944'}
     ],
 
     /**
@@ -52,15 +51,15 @@ var cmsConfig = {
     beianResourceIdArray: [
         {title: '乡镇风采', resourceId: ''},
         // ---------------  菜单  ---------------  //
-        {title: '山亭镇', resourceId: '812'},       //   山亭镇
-        {title: '忠门镇', resourceId: '813'},       //   忠门镇
-        {title: '东埔镇', resourceId: '814'},       //   东埔镇
+        {title: '山亭镇', resourceId: '947'},       //   山亭镇
+        {title: '忠门镇', resourceId: '948'},       //   忠门镇
+        {title: '东埔镇', resourceId: '949'},       //   东埔镇
 
         // ---------------  海报（播放视频）  ---------------  //
-        {title: '右下海报', resourceId: '815'},       //   右下海报
+        {title: '右下海报', resourceId: '951'},       //   右下海报
 
         // ---------------  列表  ---------------  //
-        {title: '最新动态', resourceId: '769'}
+        {title: '最新动态', resourceId: '950'}
 
         // ---------------  滚动页  ---------------  //
     ],
@@ -75,10 +74,10 @@ var cmsConfig = {
         // ---------------  海报（播放视频）  ---------------  //
 
         // ---------------  列表  ---------------  //
-        {title: '最新信息', resourceId: '770'},
+        {title: '最新信息', resourceId: '953'},
 
         // ---------------  滚动页  ---------------  //
-        {title: '左侧滚动页', resourceId: '857'}
+        {title: '左侧滚动页', resourceId: '952'}
     ],
 
 
@@ -89,16 +88,16 @@ var cmsConfig = {
         {title: '智慧港城', resourceId: ''},
 
         // ---------------  菜单  ---------------  //
-        {title: '右侧一', resourceId: '771'},
-        {title: '右侧二', resourceId: '771'},
-        {title: '右侧三', resourceId: '771'},
-        {title: '右侧四', resourceId: '771'},
+        {title: '右侧一', resourceId: '956'},
+        {title: '右侧二', resourceId: '957'},
+        {title: '右侧三', resourceId: '958'},
+        {title: '右侧四', resourceId: '959'},
 
         // ---------------  海报（播放视频）  ---------------  //
-        {title: '中间海报', resourceId: '771'},
+        {title: '中间海报', resourceId: '955'},
 
         // ---------------  列表  ---------------  //
-        {title: '左侧列表', resourceId: '858'}
+        {title: '左侧列表', resourceId: '954'}
 
         // ---------------  滚动页  ---------------  //
 
@@ -113,11 +112,16 @@ var cmsConfig = {
         // ---------------  菜单  ---------------  //
 
         // ---------------  海报（播放视频）  ---------------  //
+        {title: '右侧一', resourceId: '960'},
+        {title: '右侧二', resourceId: '961'},
+        {title: '右侧三', resourceId: '962'},
+        {title: '中间大海报', resourceId: '963'},
 
         // ---------------  列表  ---------------  //
+        {title: '文化旅游', resourceId: '964'}
 
         // ---------------  滚动页  ---------------  //
-        {title: '右侧滚动页', resourceId: '854'}
+
     ],
 
     /**
@@ -126,16 +130,16 @@ var cmsConfig = {
     topicResourceIdArray: [
         {title: '专题专栏', resourceId: '0'},
         // ---------------  菜单  ---------------  //
-        {title: '海报一', resourceId: '875'},
-        {title: '海报二', resourceId: '876'},
-        {title: '海报三', resourceId: '822'},
-        {title: '海报四', resourceId: '823'},
+        {title: '左侧海报上', resourceId: '965'},
+        {title: '左侧海报下', resourceId: '966'},
+        {title: '中间海报上', resourceId: '967'},
+        {title: '中间海报下', resourceId: '968'},
 
 
         // ---------------  海报（播放视频）  ---------------  //
 
         // ---------------  列表  ---------------  //
-        {title: '最新动态', resourceId: '859'}
+        {title: '最新动态', resourceId: '969'}
 
         // ---------------  滚动页  ---------------  //
 

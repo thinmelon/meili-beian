@@ -41,7 +41,7 @@
                     width: 210,
                     height: 144,
                     bgImageSrc: 'url(../images/culture/1.png) no-repeat',
-                    resourceId: 0,
+                    resourceId: cmsConfig.cultureResourceIdArray[1].resourceId,
                     url: 'http://10.215.0.39/fujiandangjianNew/shipinhuiyi/ddsy.html?cId=783&IP=192.168.12.139&port=8080'
                 },
                 {
@@ -51,7 +51,7 @@
                     width: 581,
                     height: 452,
                     bgImageSrc: 'url(../images/culture/5.png) no-repeat',
-                    resourceId: 0,
+                    resourceId: cmsConfig.cultureResourceIdArray[4].resourceId,
                     url: 'http://10.215.0.39/fujiandangjianNew/shipinhuiyi/ddsy.html?cId=784&IP=192.168.12.139&port=8080'
                 },
                 {
@@ -61,7 +61,7 @@
                     width: 210,
                     height: 144,
                     bgImageSrc: 'url(../images/culture/2.png) no-repeat',
-                    resourceId: 0,
+                    resourceId: cmsConfig.cultureResourceIdArray[2].resourceId,
                     url: 'http://vod.fjgdwl.com:80/ddh2017/index.html'
                 },
                 {
@@ -71,7 +71,7 @@
                     width: 210,
                     height: 144,
                     bgImageSrc: 'url(../images/culture/3.png) no-repeat',
-                    resourceId: 0,
+                    resourceId: cmsConfig.cultureResourceIdArray[3].resourceId,
                     url: 'http://10.215.0.39/fujiandangjianNew/whsh1.html?cId=786&IP=192.168.12.139&port=8080'
                 }
 //                {
@@ -109,7 +109,7 @@
         this.itemMoreWidth = 121;
         this.itemMoreHeight = 42;
         this.listItemNum = 5;
-        this.resourceId = cmsConfig.cultureResourceIdArray[1].resourceId;
+        this.resourceId = cmsConfig.cultureResourceIdArray[5].resourceId;
 
         // 方法
     }
@@ -203,29 +203,43 @@
 
             switch (this.cursor.focusArea) {
                 case 0:         // 菜单
-                    var i,
-                        _num = 0;
-
-                    for (i = 0; i < this.cursor.menu.focusPosY; i++) {
-                        _num += this.cursor.menu.itemsPerLine[i];
-                    }
-                    _num += this.cursor.menu.focusPosX;
-                    window.location.href = this.cursor.menu.menuItemArray[_num].url;
+//                    var i,
+//                        _num = 0;
+//
+//                    for (i = 0; i < this.cursor.menu.focusPosY; i++) {
+//                        _num += this.cursor.menu.itemsPerLine[i];
+//                    }
+//                    _num += this.cursor.menu.focusPosX;
+//                    window.location.href = this.cursor.menu.menuItemArray[_num].url;
                     break;
-                case 6:     //  滚动页
-                    params =
-                        {
-                            'PG-ONE': {
-                                focusArea: this.cursor.focusArea
-                            },
-                            'VIDEO': {
-                                backURL: this.backUrl(),
-                                focusArea: this.cursor.focusArea,
-                                assertId: this.cursor.swiper.album[this.cursor.swiper.position].assertId
-                            }
+                case 2:         // 列表
+                    params = {
+                        'PG-ONE': {
+                            focusArea: this.cursor.focusArea,
+                            focusPos: this.cursor.list.focusPos
+                        }
+                    };
+                    if (this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].flag === 0) {
+                        params.VIDEO = {
+                            backURL: this.backUrl(),
+                            fileName: this.cursor.fileName,
+                            focusArea: this.cursor.focusArea,
+                            focusPos: this.cursor.list.focusPos,
+                            assertId: this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].assetID
                         };
-                    postfix = this.package(params);
-                    window.location.href = 'video.html' + postfix;
+                        postfix = this.package(params);
+                        window.location.href = 'video.html' + postfix;
+                    } else {
+                        params.PG_MORE = {
+                            resourceId: cmsConfig.apartmentResourceIdArray[1].resourceId,
+                            resourceType: 'video',
+                            backURL: 'culture.html',
+                            logoImageSrc: '',
+                            pageIndex: 1
+                        };
+                        postfix = this.package(params);
+                        window.location.href = 'more.html' + postfix;
+                    }
                     break;
                 default:
                     break;

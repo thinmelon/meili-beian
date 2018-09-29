@@ -82,9 +82,9 @@
         this.noticesBoardBarWidth = 369;
         this.noticesBoardBarHeight = 47;
         this.noticesBoardBarText = '乡镇风采';
-        this.itemLeft = 865;
+        this.itemLeft = 875;
         this.itemTop = 212;
-        this.itemWidth = 304;
+        this.itemWidth = 314;
         this.itemHeight = 32;
         this.itemMoreLeft = 1058;
         this.itemMoreTop = 390;
@@ -204,20 +204,34 @@
                     postfix = this.package(params);
                     window.location.href = 'more.html' + postfix;
                     break;
-                case 6:     //  滚动页
-                    params =
-                        {
-                            'PG-ONE': {
-                                focusArea: this.cursor.focusArea
-                            },
-                            'VIDEO': {
-                                backURL: this.backUrl(),
-                                focusArea: this.cursor.focusArea,
-                                assertId: this.cursor.swiper.album[this.cursor.swiper.position].assertId
-                            }
+                case 2:         // 列表
+                    params = {
+                        'PG-ONE': {
+                            focusArea: this.cursor.focusArea,
+                            focusPos: this.cursor.list.focusPos
+                        }
+                    };
+                    if (this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].flag === 0) {
+                        params.VIDEO = {
+                            backURL: this.backUrl(),
+                            fileName: this.cursor.fileName,
+                            focusArea: this.cursor.focusArea,
+                            focusPos: this.cursor.list.focusPos,
+                            assertId: this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].assetID
                         };
-                    postfix = this.package(params);
-                    window.location.href = 'video.html' + postfix;
+                        postfix = this.package(params);
+                        window.location.href = 'video.html' + postfix;
+                    } else {
+                        params.PG_MORE = {
+                            resourceId: cmsConfig.newsResourceIdArray[1].resourceId,
+                            resourceType: 'video',
+                            backURL: 'beian.html',
+                            logoImageSrc: '',
+                            pageIndex: 1
+                        };
+                        postfix = this.package(params);
+                        window.location.href = 'more.html' + postfix;
+                    }
                     break;
                 default:
                     break;

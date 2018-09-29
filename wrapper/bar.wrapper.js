@@ -3,7 +3,7 @@ function BarComponent() {
 
     this.barItemArray = [
         {
-            title: '电视首页',
+            title: '美丽北岸',
             resourceId: 0,
             url: 'index.html',
             left: 0,
@@ -58,14 +58,14 @@ function BarComponent() {
             url: 'putian.html',
             left: 918,
             width: 120
+        },
+        {
+            title: '电视首页',
+            resourceId: 0,
+            url: 'http://10.215.0.10:80/ui3/ui3/loading.htm?opk=4',
+            left: 1044,
+            width: 120
         }
-        //{
-        //    title: '电视首页',
-        //    resourceId: 0,
-        //    url: '',
-        //    left: 1044,
-        //    width: 120
-        //}
         // {
         //     title: '电视首页',
         //     resourceId: 0,

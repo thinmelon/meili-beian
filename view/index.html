@@ -40,7 +40,7 @@
                     width: 369,
                     height: 178,
                     bgImageSrc: 'url(../images/index/5.png) no-repeat',
-                    resourceId: 0
+                    resourceId: cmsConfig.indexResourceIdArray[2].resourceId
                 }
             ]
         }];
@@ -100,9 +100,6 @@
                     this.remove('PG-ONE');              // 清除同一级的路径记录
                     params =
                         {
-                            /**
-                             * 一级页面
-                             */
                             'PG-ONE': {
                                 focusArea: this.cursor.focusArea,
                                 focusPos: this.cursor.bar.focusPos + 1
@@ -208,10 +205,10 @@
 //                        window.location.href = 'video.html' + postfix;
 //                    }
                     break;
-                case 5:
-                    this.doBack();
+                case 5:         // 栏目
+//                    this.doBack();
                     break;
-                case 6:
+                case 6:         // 滚动图片
                     params =
                         {
                             'PG-ONE': {
@@ -332,7 +329,7 @@
         barComponent.init();
         swiperComponent.init();
         menuComponent.init();
-//        videoComponent.init();
+        videoComponent.init();
         weatherModule.init(function () {
             if (weatherModule.temperature !== '') {
                 document.getElementById('weather-forecast').innerHTML =
@@ -344,7 +341,6 @@
         });
 
         cursorComponent.focusOn();
-//        transferComponent.autoJumping();
     };
 
     window.onunload = function () {

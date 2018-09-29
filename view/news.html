@@ -40,7 +40,7 @@
                     width: 369,
                     height: 269,
                     bgImageSrc: 'url(../images/news/1.png) no-repeat',
-                    resourceId: 0
+                    resourceId: cmsConfig.newsResourceIdArray[1].resourceId
                 },
                 {
                     left: 858,
@@ -48,7 +48,7 @@
                     width: 369,
                     height: 178,
                     bgImageSrc: 'url(../images/news/2.png) no-repeat',
-                    resourceId: 0
+                    resourceId: cmsConfig.newsResourceIdArray[2].resourceId
                 }
             ]
         }];
@@ -75,7 +75,7 @@
         this.itemMoreWidth = 142;
         this.itemMoreHeight = 24;
         this.listItemNum = 8;
-        this.resourceId = cmsConfig.newsResourceIdArray[1].resourceId;
+        this.resourceId = cmsConfig.newsResourceIdArray[3].resourceId;
 
         // 方法
     }
@@ -185,21 +185,6 @@
                         postfix = this.package(params);
                         window.location.href = 'more.html' + postfix;
                     }
-                    break;
-                case 6:     //  滚动页
-                    params =
-                        {
-                            'PG-ONE': {
-                                focusArea: this.cursor.focusArea
-                            },
-                            'VIDEO': {
-                                backURL: this.backUrl(),
-                                focusArea: this.cursor.focusArea,
-                                assertId: this.cursor.swiper.album[this.cursor.swiper.position].assertId
-                            }
-                        };
-                    postfix = this.package(params);
-                    window.location.href = 'video.html' + postfix;
                     break;
                 default:
                     break;

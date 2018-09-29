@@ -21,14 +21,6 @@
     background-size: 100%;
 }
 
-/* ----  标题LOGO  ---- */
-.title-logo {
-    background: url(../images/xiuyu.png) no-repeat;
-    margin: 54px 0 0 276px;
-    width: 97px;
-    height: 23px;
-}
-
 /* ----  内容版块  ---- */
 .row {
     margin: 0 auto;
@@ -56,8 +48,7 @@
     font: 21px "Microsoft YaHei";
     text-align: center;
     line-height: 39px;
-    margin: 10px;
-    /*padding-top: 14px;*/
+    margin: 10px 10px 0 10px;
 }
 
 /* ----  菜单  ---- */
@@ -92,16 +83,6 @@
     width: 25px;
     height: 25px;
     /*display: inline;*/
-}
-
-/* ----  内部栏  ---- */
-.subBar {
-    position: absolute;
-    width: 1175px;
-    height: 49px;
-    top: 164px;
-    left: 56px;
-    background: url(../images/party/sub-bar.png);
 }
 
 /* ----  公告栏  ---- */
