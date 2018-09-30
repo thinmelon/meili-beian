@@ -130,10 +130,9 @@
                     this.cursor.focusArea = 0;
                     break;
                 case 5:         // 栏目
-                    this.remove('PG-ONE');              // 清除同一级的路径记录
-                    this.cursor.bar.moveX(direction, '');
+                    this.remove('PG-ONE');
+                    this.cursor.bar.moveX(direction);
                     break;
-
                 default:
                     break;
             }
@@ -187,22 +186,26 @@
                     }
                     _num += this.cursor.menu.focusPosX;
 
-                    params = {
-                        'PG-ONE': {
-                            focusArea: this.cursor.focusArea,
-                            focusPosX: this.cursor.menu.focusPosX,
-                            focusPosY: this.cursor.menu.focusPosY
-                        }
-                    };
-                    params.PG_MORE = {
-                        resourceId: this.cursor.menu.menuItemArray[_num].resourceId,
-                        resourceType: 'video',
-                        backURL: 'xiuyu.html',
-                        logoImageSrc: '',
-                        pageIndex: 1
-                    };
-                    postfix = this.package(params);
-                    window.location.href = 'more.html' + postfix;
+                    if (_num === 3) {
+
+                    } else {
+                        params = {
+                            'PG-ONE': {
+                                focusArea: this.cursor.focusArea,
+                                focusPosX: this.cursor.menu.focusPosX,
+                                focusPosY: this.cursor.menu.focusPosY
+                            }
+                        };
+                        params.PG_MORE = {
+                            resourceId: this.cursor.menu.menuItemArray[_num].resourceId,
+                            resourceType: 'video',
+                            backURL: 'beian.html',
+                            logoImageSrc: '',
+                            pageIndex: 1
+                        };
+                        postfix = this.package(params);
+                        window.location.href = 'more.html' + postfix;
+                    }
                     break;
                 case 2:         // 列表
                     params = {

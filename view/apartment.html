@@ -94,8 +94,8 @@
                     this.cursor.focusArea = 6;
                     break;
                 case 5:         // 栏目
-                    this.remove('PG-ONE');              // 清除同一级的路径记录
-                    this.cursor.bar.moveX(direction, '');
+                    this.remove('PG-ONE');
+                    this.cursor.bar.moveX(direction);
                     break;
                 case 6:         //  滚动图片
                     if (-1 === this.cursor.swiper.moveX(direction)) {

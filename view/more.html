@@ -7,16 +7,12 @@
 </head>
 <body>
 <div class="background">
-    <!--<div id="self-define-logo" class="self-define-logo">-->
-    <!--<img src="" alt="logo"/>-->
-    <!--</div>-->
+    <div id="bar" class="bar"></div>
     <div id="content" class="more-page-content"></div>
     <div class="more-page-index-img">
         <div id="more-page-index-text" class="more-page-index-text">
         </div>
     </div>
-    <div id="weather-forecast"></div>
-    <div id="intro-btn-usage"></div>
     <div id="cursor"></div>
     <div id="debug-message"></div>
 </div>
@@ -25,6 +21,8 @@
 <script type="application/javascript" src="../utility/async.js"></script>
 <script type="application/javascript" src="../cms/cms.config.js"></script>
 <script type="application/javascript" src="../cms/cms.api.js"></script>
+<script type="application/javascript" src="../module/bar.module.js"></script>
+<script type="application/javascript" src="../wrapper/bar.wrapper.js"></script>
 <script type="application/javascript" src="../module/cursor.module.js"></script>
 <script type="application/javascript" src="../module/more.module.js"></script>
 <script type="application/javascript" src="../module/pager.module.js"></script>
@@ -34,24 +32,45 @@
         MoreModule.call(this);
     }
 
-    function CursorComponent(more) {
+    function CursorComponent(bar, more) {
         CursorModule.call(this);
 
         // 属性
         this.focusArea = 4;
+        this.bar = bar;
         this.more = more;
         this.fileName = 'PG_MORE';
 
         // 方法
         this.moveX = function (direction) {
             this.focusOut();
-            this.more.moveX(direction);
+            switch (this.focusArea) {
+                case 4:
+                    this.more.moveX(direction);
+                    break;
+                case 5:
+                    this.bar.moveX(direction, true);
+                    break;
+                default:
+                    break;
+            }
             this.focusOn();
         };
 
         this.moveY = function (direction) {
             this.focusOut();
-            this.more.moveY(direction);
+            switch (this.focusArea) {
+                case 4:
+                    if (-1 === this.more.moveY(direction)) {
+                        this.focusArea = 5;
+                    }
+                    break;
+                case 5:
+                    this.focusArea = 4;
+                    break;
+                default:
+                    break;
+            }
             this.focusOn();
         };
 
@@ -64,7 +83,7 @@
         };
     }
 
-    function TransferComponent(cursor, more) {
+    function TransferComponent(cursor) {
         var that = this;
 
         TransferModule.call(this);
@@ -84,42 +103,51 @@
 
             this.remove(this.cursor.fileName);
 
-            switch (this.cursor.more.resourceType) {
-                case 'textures':
-                    params.PG_MORE = {
-                        focusArea: this.cursor.focusArea,
-                        focusPosX: this.cursor.more.focusPosX,
-                        focusPosY: this.cursor.more.focusPosY,
-                        resourceId: this.cursor.more.resourceId,
-                        resourceType: this.cursor.more.resourceType,
-                        backURL: this.cursor.more.backURL,
-                        logoImageSrc: this.cursor.more.logoImageSrc,
-                        pageIndex: this.cursor.more.pageIndex
-                    };
-                    params.PG_TEXT = {
-                        resourceId: this.cursor.more.moreItemArray[this.cursor.more.focusPosY][this.cursor.more.focusPosX].id,
-                        isShowGraphics: 'show',
-                        backURL: 'more.html',
-                        logoImageSrc: this.cursor.more.logoImageSrc
-                    };
-                    postfix = this.package(params);
-                    window.location.href = 'detail.html' + postfix;
+            switch (this.cursor.focusArea) {
+                case 4:
+                    switch (this.cursor.more.resourceType) {
+                        case 'textures':
+                            params.PG_MORE = {
+                                focusArea: this.cursor.focusArea,
+                                focusPosX: this.cursor.more.focusPosX,
+                                focusPosY: this.cursor.more.focusPosY,
+                                resourceId: this.cursor.more.resourceId,
+                                resourceType: this.cursor.more.resourceType,
+                                backURL: this.cursor.more.backURL,
+                                logoImageSrc: this.cursor.more.logoImageSrc,
+                                pageIndex: this.cursor.more.pageIndex
+                            };
+                            params.PG_TEXT = {
+                                resourceId: this.cursor.more.moreItemArray[this.cursor.more.focusPosY][this.cursor.more.focusPosX].id,
+                                isShowGraphics: 'show',
+                                backURL: 'more.html',
+                                logoImageSrc: this.cursor.more.logoImageSrc
+                            };
+                            postfix = this.package(params);
+                            window.location.href = 'detail.html' + postfix;
+                            break;
+                        case 'video':
+                            params.VIDEO = {
+                                backURL: this.backUrl(),
+                                fileName: this.cursor.fileName,
+                                focusArea: this.cursor.focusArea,
+                                focusPosX: this.cursor.more.focusPosX,
+                                focusPosY: this.cursor.more.focusPosY,
+                                resourceId: this.cursor.more.resourceId,
+                                resourceType: this.cursor.more.resourceType,
+                                morePageBackURL: this.cursor.more.backURL,
+                                pageIndex: this.cursor.more.pageIndex,
+                                assertId: this.cursor.more.moreItemArray[this.cursor.more.focusPosY][this.cursor.more.focusPosX].assetid
+                            };
+                            postfix = this.package(params);
+                            window.location.href = 'video.html' + postfix;
+                            break;
+                        default:
+                            break;
+                    }
                     break;
-                case 'video':
-                    params.VIDEO = {
-                        backURL: this.backUrl(),
-                        fileName: this.cursor.fileName,
-                        focusArea: this.cursor.focusArea,
-                        focusPosX: this.cursor.more.focusPosX,
-                        focusPosY: this.cursor.more.focusPosY,
-                        resourceId: this.cursor.more.resourceId,
-                        resourceType: this.cursor.more.resourceType,
-                        morePageBackURL: this.cursor.more.backURL,
-                        pageIndex: this.cursor.more.pageIndex,
-                        assertId: this.cursor.more.moreItemArray[this.cursor.more.focusPosY][this.cursor.more.focusPosX].assetid
-                    };
-                    postfix = this.package(params);
-                    window.location.href = 'video.html' + postfix;
+                case 5:
+                    this.cursor.bar.doSelect();
                     break;
                 default:
                     break;
@@ -166,16 +194,19 @@
 
     window.onload = function () {
         var
+            barComponent = new BarComponent(),
             moreComponent = new MoreComponent(),
-            cursorComponent = new CursorComponent(moreComponent),
-            transferComponent = new TransferComponent(cursorComponent, moreComponent);
+            cursorComponent = new CursorComponent(barComponent, moreComponent),
+//            cursorComponent = new CursorComponent(moreComponent),
+            transferComponent = new TransferComponent(cursorComponent);
+
+        document.onkeydown = transferComponent.onKeyDown;
 
         transferComponent.init();
+        barComponent.init();
         moreComponent.init(moreComponent.pageIndex, function () {
             cursorComponent.focusOn();
         });
-
-        document.onkeydown = transferComponent.onKeyDown;
     };
 </script>
 </html>

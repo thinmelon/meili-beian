@@ -90,7 +90,7 @@
         this.itemMoreTop = 578;
         this.itemMoreWidth = 121;
         this.itemMoreHeight = 24;
-        this.listItemNum = 5;
+        this.listItemNum = 8;
         this.resourceId = cmsConfig.topicResourceIdArray[5].resourceId;
 
         // 方法
@@ -132,7 +132,7 @@
                     this.cursor.focusArea = 0;
                     break;
                 case 5:         // 栏目
-                    this.remove('PG-ONE');              // 清除同一级的路径记录
+                    this.remove('PG-ONE');
                     this.cursor.bar.moveX(direction);
                     break;
                 default:
@@ -175,6 +175,31 @@
             this.remove(this.cursor.fileName);
 
             switch (this.cursor.focusArea) {
+                case 0:         // 菜单
+                    var i,
+                        _num = 0;
+
+                    for (i = 0; i < this.cursor.menu.focusPosY; i++) {
+                        _num += this.cursor.menu.itemsPerLine[i];
+                    }
+                    _num += this.cursor.menu.focusPosX;
+
+                    params =
+                        {
+                            'PG-ONE': {
+                                focusArea: this.cursor.focusArea,
+                                focusPosX: this.cursor.menu.focusPosX,
+                                focusPosY: this.cursor.menu.focusPosY
+                            },
+                            'VIDEO': {
+                                backURL: this.backUrl(),
+                                focusArea: this.cursor.focusArea,
+                                resourceId: this.cursor.menu.menuItemArray[_num].resourceId
+                            }
+                        };
+                    postfix = this.package(params);
+                    window.location.href = 'video.html' + postfix;
+                    break;
                 case 2:         // 列表
                     params = {
                         'PG-ONE': {

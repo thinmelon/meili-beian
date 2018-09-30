@@ -11,8 +11,8 @@ var cmsConfig = {
     imgUrl: 'http://10.184.255.10:8080/manage/',
     backUrl: '',
     index_back_url: '',
-    environment: 'DEBUG',
-    // environment: 'PRODUCT',
+    // environment: 'DEBUG',
+    environment: 'PRODUCT',
 
     /**
      * 美丽北岸
@@ -89,9 +89,9 @@ var cmsConfig = {
 
         // ---------------  菜单  ---------------  //
         {title: '右侧一', resourceId: '956'},
-        {title: '右侧二', resourceId: '957'},
-        {title: '右侧三', resourceId: '958'},
-        {title: '右侧四', resourceId: '959'},
+        {title: '右侧二', resourceId: '970'},
+        {title: '右侧三', resourceId: '971'},
+        {title: '右侧四', resourceId: '972'},
 
         // ---------------  海报（播放视频）  ---------------  //
         {title: '中间海报', resourceId: '955'},
