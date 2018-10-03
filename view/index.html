@@ -10,7 +10,7 @@
     <div id="bar" class="bar"></div>
     <div id="menu"></div>
     <div id="swiper" class="swiper"></div>
-    <div id="weather-forecast"></div>
+    <!--<div id="weather-forecast"></div>-->
     <div id="cursor"></div>
     <div id="debug-message"></div>
 </div>
@@ -26,7 +26,7 @@
 <script type="application/javascript" src="../module/video.module.js"></script>
 <script type="application/javascript" src="../module/cursor.module.js"></script>
 <script type="application/javascript" src="../module/transfer.module.js"></script>
-<script type="application/javascript" src="../module/weather.module.js"></script>
+<!--<script type="application/javascript" src="../module/weather.module.js"></script>-->
 <script type="application/javascript">
     function MenuComponent() {
         MenuModule.call(this);
@@ -305,32 +305,34 @@
             swiperComponent = new SwiperComponent(),
             menuComponent = new MenuComponent(),
             cursorComponent = new CursorComponent(barComponent, swiperComponent, menuComponent, videoComponent),
-            transferComponent = new TransferComponent(cursorComponent),
-            weatherModule = new WeatherModule();
+            transferComponent = new TransferComponent(cursorComponent);
+//            weatherModule = new WeatherModule();
 
+        /**
+         *  添加按键事件处理
+         */
         document.onkeydown = transferComponent.onKeyDown;           //  按键事件处理
         document.onkeypress = transferComponent.videoPlayHandler;
         document.onirkeypress = transferComponent.videoPlayHandler;
         document.onsystemevent = transferComponent.videoPlayHandler;
-
-        setTimeout(function () {
-            videoComponent.checkOnceAgain();
-        }, 5000);
-
+        /**
+         *  初始化各模块
+         */
+        document.getElementById('debug-message').innerHTML += '<br/>' + '======================  启动初始化  ======================';
         transferComponent.init();
         barComponent.init();
         swiperComponent.init();
         menuComponent.init();
         videoComponent.init();
-        weatherModule.init(function () {
-            if (weatherModule.temperature !== '') {
-                document.getElementById('weather-forecast').innerHTML =
-                    '今日天气： ' +
-                    '&nbsp;&nbsp;&nbsp;' + weatherModule.weather +
-                    '&nbsp;&nbsp;&nbsp;' + weatherModule.temperature +
-                    '&nbsp;&nbsp;&nbsp;' + weatherModule.windScale;
-            }
-        });
+//        weatherModule.init(function () {
+//            if (weatherModule.temperature !== '') {
+//                document.getElementById('weather-forecast').innerHTML =
+//                    '今日天气： ' +
+//                    '&nbsp;&nbsp;&nbsp;' + weatherModule.weather +
+//                    '&nbsp;&nbsp;&nbsp;' + weatherModule.temperature +
+//                    '&nbsp;&nbsp;&nbsp;' + weatherModule.windScale;
+//            }
+//        });
 
         cursorComponent.focusOn();
     };
