@@ -6,7 +6,7 @@ var cmsApi = {
         postman.createXmlHttpRequest(
             function (result) {
                 var json = eval('(' + result + ')');
-                document.getElementById('debug-message').innerHTML += '<br/>' + ' Response:' + result;
+                //document.getElementById('debug-message').innerHTML += '<br/>' + ' Response:' + result;
                 response(json);
             },
             function (err) {
@@ -123,7 +123,7 @@ var cmsApi = {
                 + '\' languageCode=\'Zh-CN\' profile=\'1\'/>';
 
         document.getElementById('debug-message').innerHTML += '<br/>' + 'fetchVideoDetails  ==>  URL ==> ' + url;
-        document.getElementById('debug-message').innerHTML += '<br/>' + 'Data ==> ' + encodeURI(data);
+        //document.getElementById('debug-message').innerHTML += '<br/>' + 'Data ==> ' + encodeURI(data);
 
         this.doPost(url, data, response);
     },
@@ -150,7 +150,7 @@ var cmsApi = {
             + '\' serviceId=\'' + serviceId + '\'/>';
 
         document.getElementById('debug-message').innerHTML += '<br/>' + 'fetchRtspStream    ==>   URL ==> ' + url;
-        document.getElementById('debug-message').innerHTML += '<br/>' + 'Data ==> ' + encodeURI(data);
+        //document.getElementById('debug-message').innerHTML += '<br/>' + 'Data ==> ' + encodeURI(data);
 
         this.doPost(url, data, response);
     },
@@ -209,8 +209,8 @@ var cmsApi = {
             var displayArea = mediaPlayer.setVideoDisplayArea(rectangle);
             var displayMode = mediaPlayer.setVideoDisplayMode(0);
             var refresh = mediaPlayer.refresh();
-            document.getElementById('debug-message').innerHTML += '<br/>' + 'createMediaPlayer ==> rectangle ==> LEFT ' + rectangle.left + ' | TOP: ' + rectangle.top + ' | WIDTH: ' + rectangle.width + ' | HEIGHT: ' + rectangle.height;
-            document.getElementById('debug-message').innerHTML += '<br/>' + 'createMediaPlayer ==> displayArea: ' + displayArea + ' | displayMode: ' + displayMode + ' | refresh: ' + refresh;
+            //document.getElementById('debug-message').innerHTML += '<br/>' + 'createMediaPlayer ==> rectangle ==> LEFT ' + rectangle.left + ' | TOP: ' + rectangle.top + ' | WIDTH: ' + rectangle.width + ' | HEIGHT: ' + rectangle.height;
+            //document.getElementById('debug-message').innerHTML += '<br/>' + 'createMediaPlayer ==> displayArea: ' + displayArea + ' | displayMode: ' + displayMode + ' | refresh: ' + refresh;
         }
 
         return mediaPlayer;
@@ -278,7 +278,7 @@ var cmsApi = {
         data = "<?xml version='1.0' encoding='UTF-8'?><NavCheck portalId='1' client='" + client + "' userType='0'/>";
 
         document.getElementById('debug-message').innerHTML += '<br/>' + 'checkAuthentication    ==>   URL ==> ' + url;
-        document.getElementById('debug-message').innerHTML += '<br/>' + 'Data ==> ' + encodeURI(data);
+        //document.getElementById('debug-message').innerHTML += '<br/>' + 'Data ==> ' + encodeURI(data);
 
         this.doPost(url, data, response);
     },
