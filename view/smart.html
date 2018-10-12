@@ -221,7 +221,7 @@
                     if (_num === 4) {
                         params.PG_MORE = {
                             resourceId: this.cursor.menu.menuItemArray[_num].resourceId,
-                            resourceType: 'video',
+//                            resourceType: 'video',
                             backURL: 'smart.html',
                             logoImageSrc: '',
                             pageIndex: 1
@@ -246,6 +246,14 @@
                         }
                     };
                     if (this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].flag === 0) {
+                        params.PG_TEXT = {
+                            resourceId: this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].id,
+                            backURL: 'smart.html',
+                        };
+                        postfix = this.package(params);
+                        window.location.href = 'detail.html' + postfix;
+                    }
+                    else if (this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].flag === 1) {
                         params.VIDEO = {
                             backURL: this.backUrl(),
                             fileName: this.cursor.fileName,
@@ -257,10 +265,9 @@
                         window.location.href = 'video.html' + postfix;
                     } else {
                         params.PG_MORE = {
-                            resourceId: cmsConfig.apartmentResourceIdArray[1].resourceId,
-                            resourceType: 'video',
+                            resourceId: cmsConfig.smartResourceIdArray[6].resourceId,
+//                            resourceType: 'video',
                             backURL: 'smart.html',
-                            logoImageSrc: '',
                             pageIndex: 1
                         };
                         postfix = this.package(params);

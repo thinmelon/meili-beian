@@ -151,6 +151,14 @@
                         }
                     };
                     if (this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].flag === 0) {
+                        params.PG_TEXT = {
+                            resourceId: this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].id,
+                            backURL: 'apartment.html',
+                        };
+                        postfix = this.package(params);
+                        window.location.href = 'detail.html' + postfix;
+                    }
+                    else if (this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].flag === 1) {
                         params.VIDEO = {
                             backURL: this.backUrl(),
                             fileName: this.cursor.fileName,
@@ -163,9 +171,8 @@
                     } else {
                         params.PG_MORE = {
                             resourceId: cmsConfig.apartmentResourceIdArray[1].resourceId,
-                            resourceType: 'video',
+//                            resourceType: 'video',
                             backURL: 'apartment.html',
-                            logoImageSrc: '',
                             pageIndex: 1
                         };
                         postfix = this.package(params);

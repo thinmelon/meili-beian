@@ -190,6 +190,14 @@
                         }
                     };
                     if (this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].flag === 0) {
+                        params.PG_TEXT = {
+                            resourceId: this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].id,
+                            backURL: 'news.html',
+                        };
+                        postfix = this.package(params);
+                        window.location.href = 'detail.html' + postfix;
+                    }
+                    else if (this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].flag === 1) {
                         params.VIDEO = {
                             backURL: this.backUrl(),
                             fileName: this.cursor.fileName,
@@ -201,10 +209,8 @@
                         window.location.href = 'video.html' + postfix;
                     } else {
                         params.PG_MORE = {
-                            resourceId: cmsConfig.newsResourceIdArray[1].resourceId,
-                            resourceType: 'video',
+                            resourceId: cmsConfig.newsResourceIdArray[3].resourceId,
                             backURL: 'news.html',
-                            logoImageSrc: '',
                             pageIndex: 1
                         };
                         postfix = this.package(params);

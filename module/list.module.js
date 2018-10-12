@@ -45,10 +45,10 @@ function ListModule() {
 
         if (cmsConfig.environment === 'DEBUG') {
             var test = [
-                {assetid: 611, title: '城厢区是福建省莆田市辖区，亦称...', img: '', flag: 0, id: 111},
+                {assetid: 611, title: '城厢区是福建省莆田市辖区，亦称...', img: '', flag: 1, id: 111},
                 {assetid: 611, title: '仙游县地处福建东南沿海中部，湄...', img: '1', flag: 0, id: 111},
                 {assetid: 611, title: '荔城区位于福建东南沿海中部，北...', img: '1', flag: 0, id: 111},
-                {assetid: 611, title: '城厢区是福建省莆田市辖区，亦称...', img: '1', flag: 0, id: 111},
+                {assetid: 611, title: '城厢区是福建省莆田市辖区，亦称...', img: '1', flag: 1, id: 111},
                 {assetid: 611, title: '涵江区位于福建省莆田市东部沿海...', flag: 0, id: 111},
                 {assetid: 611, title: '秀屿区位于福建东南沿海中部，与...', flag: 0, id: 111},
                 {assetid: 611, title: '湄洲湾北岸经济开发区是经国家发... 副本 2', img: '1', flag: 0, id: 111},
@@ -120,7 +120,7 @@ function ListModule() {
                 assetID: array[j].assetid,
                 title: array[j].title,
                 img: array[j].img,
-                flag: 0,
+                flag: parseInt(array[j].flag),
                 id: array[j].id,
                 left: this.itemLeft,
                 top: this.itemTop + (j * this.interval),
@@ -155,7 +155,7 @@ function ListModule() {
             cursor.style.height = this.listItemTitleArray[this.focusPos].height + 'px';
 
             var _focusListItem = document.getElementById('list_item_text_' + this.focusPos);
-            if ((typeof(_focusListItem) !== 'undefined') && (this.listItemTitleArray[this.focusPos].flag === 0)) {
+            if ((typeof(_focusListItem) !== 'undefined') && (this.listItemTitleArray[this.focusPos].flag !== -1)) {
                 showTitleForMarquee(this.listItemTitleArray[this.focusPos].title, _focusListItem, this.marqueeCount);
             }
         }
@@ -165,7 +165,7 @@ function ListModule() {
         var _focusListItem = document.getElementById('list_item_text_' + this.focusPos);
 
         cursor.style.visibility = 'hidden';
-        if ((typeof (_focusListItem) !== 'undefined') && (that.listItemTitleArray[that.focusPos].flag === 0)) {
+        if ((typeof (_focusListItem) !== 'undefined') && (that.listItemTitleArray[that.focusPos].flag !== -1)) {
             _focusListItem.innerHTML = that.listItemTitleArray[that.focusPos].title;
         }
     };
@@ -188,9 +188,13 @@ function ListModule() {
     };
 
     this.doSelect = function (postfix) {
-        if (this.listItemTitleArray[this.focusPos].flag === 0) {           // 图文详情
+        if (this.listItemTitleArray[this.focusPos].flag === 0) {                    // 图文详情
             window.location.href = 'textures.html' + postfix;
-        } else {                                                            // 更多内容
+        }
+        else if (this.listItemTitleArray[this.focusPos].flag === 1) {               //  视频资源
+            window.location.href = 'video.html' + postfix;
+        }
+        else {                                                                      // 更多内容
             window.location.href = 'more.html' + postfix;
         }
     };

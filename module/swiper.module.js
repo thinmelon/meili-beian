@@ -46,10 +46,10 @@ function SwiperModule() {
             ];
             this.render();
         } else {
+            document.getElementById('debug-message').innerHTML += '<br/>' + 'SwiperModule ==> init() ==>  resourceId = ' + this.resourceId;
             if (this.resourceId !== 0) {
                 cmsApi.getListItems(this.resourceId, this.maxCount, 1, function (response) {
                     if (response.hasOwnProperty('code') && ('1' === response.code || 1 === response.code)) {
-                        document.getElementById('debug-message').innerHTML += '<br/>' + response;
                         that.remoteImage = true;        //  显示服务器上的图片
                         for (var j = 0, length = response.dataArray.length; (j < length) && (j < that.maxCount); j++) {
                             that.album.push({
@@ -60,6 +60,8 @@ function SwiperModule() {
                         that.render();
                     }
                 });
+            } else {
+                this.render();
             }
         }
     };
