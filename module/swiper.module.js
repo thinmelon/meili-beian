@@ -46,7 +46,7 @@ function SwiperModule() {
             ];
             this.render();
         } else {
-            document.getElementById('debug-message').innerHTML += '<br/>' + 'SwiperModule ==> init() ==>  resourceId = ' + this.resourceId;
+            //document.getElementById('debug-message').innerHTML += '<br/>' + 'SwiperModule ==> init() ==>  resourceId = ' + this.resourceId;
             if (this.resourceId !== 0) {
                 cmsApi.getListItems(this.resourceId, this.maxCount, 1, function (response) {
                     if (response.hasOwnProperty('code') && ('1' === response.code || 1 === response.code)) {
