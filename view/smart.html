@@ -29,6 +29,10 @@
 <script type="application/javascript" src="../module/transfer.module.js"></script>
 <script type="application/javascript">
     function MenuComponent() {
+        var i,
+            length,
+            that = this;
+
         MenuModule.call(this);
 
         this.menuPageArray = [{
@@ -39,43 +43,62 @@
                     top: 164,
                     width: 686,
                     height: 453,
-                    bgImageSrc: 'url(../images/smart/1.jpg) no-repeat',
-                    resourceId: cmsConfig.smartResourceIdArray[5].resourceId
+                    bgImageSrc: '',
+                    resourceId: cmsConfig.smartResourceIdArray[5].resourceId,
+                    assertId: ''
                 },
                 {
                     left: 1056,
                     top: 164,
                     width: 181,
                     height: 102,
-                    bgImageSrc: 'url(../images/smart/2.jpg) no-repeat',
-                    resourceId: cmsConfig.smartResourceIdArray[1].resourceId
+                    bgImageSrc: '',
+                    resourceId: cmsConfig.smartResourceIdArray[1].resourceId,
+                    assertId: ''
                 },
                 {
                     left: 1056,
                     top: 282,
                     width: 181,
                     height: 102,
-                    bgImageSrc: 'url(../images/smart/3.jpg) no-repeat',
-                    resourceId: cmsConfig.smartResourceIdArray[2].resourceId
+                    bgImageSrc: '',
+                    resourceId: cmsConfig.smartResourceIdArray[2].resourceId,
+                    assertId: ''
                 },
                 {
                     left: 1056,
                     top: 398,
                     width: 181,
                     height: 102,
-                    bgImageSrc: 'url(../images/smart/4.jpg) no-repeat',
-                    resourceId: cmsConfig.smartResourceIdArray[3].resourceId
+                    bgImageSrc: '',
+                    resourceId: cmsConfig.smartResourceIdArray[3].resourceId,
+                    assertId: ''
                 },
                 {
                     left: 1056,
                     top: 515,
                     width: 181,
                     height: 102,
-                    bgImageSrc: 'url(../images/smart/5.jpg) no-repeat',
-                    resourceId: cmsConfig.smartResourceIdArray[4].resourceId
+                    bgImageSrc: '',
+                    resourceId: cmsConfig.smartResourceIdArray[4].resourceId,
+                    assertId: ''
                 }
             ]
         }];
+
+        cmsApi.getListItems(cmsConfig.smartResourceIdArray[5].resourceId, this.menuPageArray[0].menuItemArray.length, 1, function (response) {
+                if ('1' === response.code || 1 === response.code) {
+//                    document.getElementById('debug-message').innerHTML += '<br/>' + '  dataArray Length ==> ' + response.dataArray.length;
+                    for (i = 0, length = response.dataArray.length; i < length; i++) {
+//                        document.getElementById('debug-message').innerHTML += '<br/>' + '  dataArray assertid ==> ' + response.dataArray[i].assetid;
+//                        document.getElementById('debug-message').innerHTML += '<br/>' + '  dataArray imgUrl ==> ' + cmsConfig.imgUrl + response.dataArray[i].img;
+                        that.menuPageArray[0].menuItemArray[i].assertId = response.dataArray[i].assetid;
+                        that.menuPageArray[0].menuItemArray[i].bgImageSrc = 'url(' + cmsConfig.imgUrl + response.dataArray[i].img + ')';
+                        that.init();
+                    }
+                }
+            }
+        );
     }
 
     function ListComponent() {
@@ -98,7 +121,7 @@
         this.itemMoreTop = 565;
         this.itemMoreWidth = 132;
         this.itemMoreHeight = 32;
-        this.listItemNum = 5;
+        this.listItemNum = 8;
         this.resourceId = cmsConfig.smartResourceIdArray[6].resourceId;
 
         // 方法
@@ -231,7 +254,8 @@
                         params.VIDEO = {
                             backURL: this.backUrl(),
                             focusArea: this.cursor.focusArea,
-                            resourceId: this.cursor.menu.menuItemArray[_num].resourceId
+//                            resourceId: this.cursor.menu.menuItemArray[_num].resourceId,
+                            assertId: this.cursor.menu.menuItemArray[_num].assertId
                         };
                         postfix = this.package(params);
                         window.location.href = 'video.html' + postfix;
@@ -320,7 +344,7 @@
 
         transferComponent.init();
         barComponent.init();
-        menuComponent.init();
+//        menuComponent.init();
         listComponent.init(function () {
             cursorComponent.focusOn();
         });
