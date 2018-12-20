@@ -276,7 +276,10 @@
                             },
                             'VIDEO': {
                                 backURL: this.backUrl(),
+                                fileName: this.cursor.fileName,
                                 focusArea: this.cursor.focusArea,
+                                focusPosX: this.cursor.menu.focusPosX,
+                                focusPosY: this.cursor.menu.focusPosY,
                                 resourceId: this.cursor.menu.menuItemArray[_num].resourceId
                             }
                         };
@@ -293,7 +296,7 @@
                     if (this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].flag === 0) {
                         params.PG_TEXT = {
                             resourceId: this.cursor.list.listItemTitleArray[this.cursor.list.focusPos].id,
-                            backURL: 'topic.html',
+                            backURL: 'topic.html'
                         };
                         postfix = this.package(params);
                         window.location.href = 'detail.html' + postfix;
