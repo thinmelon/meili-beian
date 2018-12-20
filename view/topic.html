@@ -9,6 +9,7 @@
 <div class="background">
     <div id="bar" class="bar"></div>
     <div id="menu"></div>
+    <div id="swiper" class="swiper"></div>
     <div id="notices_board" class="notices_board">
         <div id="notices_board_bar"></div>
         <div class="list-item-more"></div>
@@ -24,6 +25,7 @@
 <script type="application/javascript" src="../module/bar.module.js"></script>
 <script type="application/javascript" src="../wrapper/bar.wrapper.js"></script>
 <script type="application/javascript" src="../module/menu.module.js"></script>
+<script type="application/javascript" src="../module/swiper.module.js"></script>
 <script type="application/javascript" src="../module/list.module.js"></script>
 <script type="application/javascript" src="../module/cursor.module.js"></script>
 <script type="application/javascript" src="../module/transfer.module.js"></script>
@@ -32,42 +34,92 @@
         MenuModule.call(this);
 
         this.menuPageArray = [{
-            itemsPerLine: [2, 2],           // 每行所包含的元素数量
+            itemsPerLine: [3, 2, 2, 2],           // 每行所包含的元素数量
             menuItemArray: [
                 {
                     left: 42,
                     top: 164,
-                    width: 400,
-                    height: 226,
-                    bgImageSrc: 'url(../images/topic/1.jpg) no-repeat',
+                    width: 159,
+                    height: 112,
+                    bgImageSrc: 'url(../images/topic/1.png) no-repeat',
                     resourceId: cmsConfig.topicResourceIdArray[1].resourceId
                 },
                 {
-                    left: 445,
+                    left: 200,
                     top: 164,
-                    width: 400,
-                    height: 226,
-                    bgImageSrc: 'url(../images/topic/2.jpg) no-repeat',
+                    width: 159,
+                    height: 112,
+                    bgImageSrc: 'url(../images/topic/2.png) no-repeat',
                     resourceId: cmsConfig.topicResourceIdArray[2].resourceId
                 },
                 {
+                    left: 360,
+                    top: 164,
+                    width: 485,
+                    height: 273,
+                    bgImageSrc: 'url(../images/topic/9.png) no-repeat',
+                    resourceId: cmsConfig.topicResourceIdArray[9].resourceId
+                },
+                {
                     left: 42,
-                    top: 395,
-                    width: 400,
-                    height: 226,
-                    bgImageSrc: 'url(../images/topic/3.jpg) no-repeat',
+                    top: 276,
+                    width: 159,
+                    height: 112,
+                    bgImageSrc: 'url(../images/topic/3.png) no-repeat',
                     resourceId: cmsConfig.topicResourceIdArray[3].resourceId
                 },
                 {
-                    left: 445,
-                    top: 395,
-                    width: 400,
-                    height: 226,
-                    bgImageSrc: 'url(../images/topic/4.jpg) no-repeat',
+                    left: 200,
+                    top: 276,
+                    width: 159,
+                    height: 112,
+                    bgImageSrc: 'url(../images/topic/4.png) no-repeat',
                     resourceId: cmsConfig.topicResourceIdArray[4].resourceId
+                },
+                {
+                    left: 42,
+                    top: 390,
+                    width: 159,
+                    height: 112,
+                    bgImageSrc: 'url(../images/topic/5.png) no-repeat',
+                    resourceId: cmsConfig.topicResourceIdArray[5].resourceId
+                },
+                {
+                    left: 200,
+                    top: 390,
+                    width: 159,
+                    height: 112,
+                    bgImageSrc: 'url(../images/topic/6.png) no-repeat',
+                    resourceId: cmsConfig.topicResourceIdArray[6].resourceId
+                },
+                {
+                    left: 42,
+                    top: 505,
+                    width: 159,
+                    height: 112,
+                    bgImageSrc: 'url(../images/topic/7.png) no-repeat',
+                    resourceId: cmsConfig.topicResourceIdArray[7].resourceId
+                },
+                {
+                    left: 200,
+                    top: 505,
+                    width: 159,
+                    height: 112,
+                    bgImageSrc: 'url(../images/topic/8.png) no-repeat',
+                    resourceId: cmsConfig.topicResourceIdArray[8].resourceId
                 }
             ]
         }];
+    }
+
+    function SwiperComponent() {
+        SwiperModule.call(this);
+
+        this.swiperTop = 440;
+        this.swiperLeft = 360;
+        this.swiperWidth = 485;
+        this.swiperHeight = 177;
+        this.resourceId = cmsConfig.topicResourceIdArray[10].resourceId;
     }
 
     function ListComponent() {
@@ -91,20 +143,21 @@
         this.itemMoreWidth = 121;
         this.itemMoreHeight = 24;
         this.listItemNum = 8;
-        this.resourceId = cmsConfig.topicResourceIdArray[5].resourceId;
+        this.resourceId = cmsConfig.topicResourceIdArray[11].resourceId;
 
         // 方法
     }
 
-    function CursorComponent(bar, list, menu) {
+    function CursorComponent(bar, menu, swiper, list) {
         CursorModule.call(this);
 
         // 属性
         this.focusArea = 5;
         this.bar = bar;
         this.bar.focusPos = 6;
-        this.list = list;
         this.menu = menu;
+        this.swiper = swiper;
+        this.list = list;
         this.fileName = 'PG-ONE';
     }
 
@@ -124,16 +177,36 @@
                 case 0:         // 菜单
                     if (-1 === this.cursor.menu.moveX(direction)) {
                         if (direction > 0) {
-                            this.cursor.focusArea = 2;
+                            if (this.cursor.menu.focusPosY === 0) {
+                                this.cursor.focusArea = 2;          //  第一行，跳转至列表
+                            } else {
+                                this.cursor.focusArea = 6;          //  其余行，跳转至滚动图片
+                            }
                         }
                     }
                     break;
-                case 2:
-                    this.cursor.focusArea = 0;
+                case 2:         //  列表
+                    if (direction < 0) {
+                        this.cursor.focusArea = 0;
+                        this.cursor.menu.focusPosX = 2;
+                        this.cursor.menu.focusPosY = 0;
+                    }
                     break;
                 case 5:         // 栏目
                     this.remove('PG-ONE');
                     this.cursor.bar.moveX(direction);
+                    break;
+                case 6:         //  滚动图片
+                    if (-1 === this.cursor.swiper.moveX(direction)) {
+                        this.cursor.swiper.triggerTimer();
+                        if (direction < 0) {
+                            this.cursor.focusArea = 0;
+                            this.cursor.menu.focusPosX = 1;
+                            this.cursor.menu.focusPosY = 3;
+                        } else {
+                            this.cursor.focusArea = 2;
+                        }
+                    }
                     break;
                 default:
                     break;
@@ -158,6 +231,16 @@
                     this.cursor.focusArea = 0;
                     this.cursor.menu.focusPosX = 0;
                     this.cursor.menu.focusPosY = 0;
+                    break;
+                case 6:
+                    this.cursor.swiper.triggerTimer();
+                    if (direction < 0) {
+                        this.cursor.focusArea = 0;
+                        this.cursor.menu.focusPosX = 2;
+                        this.cursor.menu.focusPosY = 0;
+                    } else {
+                        this.cursor.focusArea = 5;
+                    }
                     break;
                 default:
                     break;
@@ -227,7 +310,7 @@
                         window.location.href = 'video.html' + postfix;
                     } else {
                         params.PG_MORE = {
-                            resourceId: cmsConfig.topicResourceIdArray[5].resourceId,
+                            resourceId: cmsConfig.topicResourceIdArray[11].resourceId,
 //                            resourceType: 'video',
                             backURL: 'topic.html',
                             pageIndex: 1
@@ -277,8 +360,9 @@
         var
             barComponent = new BarComponent(),
             menuComponent = new MenuComponent(),
+            swiperComponent = new SwiperComponent(),
             listComponent = new ListComponent(),
-            cursorComponent = new CursorComponent(barComponent, listComponent, menuComponent),
+            cursorComponent = new CursorComponent(barComponent, menuComponent, swiperComponent, listComponent),
             transferComponent = new TransferComponent(cursorComponent);
 
         document.onkeydown = transferComponent.onKeyDown;
@@ -286,6 +370,7 @@
         transferComponent.init();
         barComponent.init();
         menuComponent.init();
+        swiperComponent.init();
         listComponent.init(function () {
             cursorComponent.focusOn();
         });

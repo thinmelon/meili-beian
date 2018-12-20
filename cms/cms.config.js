@@ -126,10 +126,16 @@ var cmsConfig = {
     topicResourceIdArray: [
         {title: '专题专栏', resourceId: '0'},
         // ---------------  菜单  ---------------  //
-        {title: '左侧海报上', resourceId: '965'},
-        {title: '左侧海报下', resourceId: '966'},
+        {title: '左侧海报一', resourceId: '1049'},
+        {title: '右侧海报一', resourceId: '1053'},
+        {title: '左侧海报二', resourceId: '1050'},
+        {title: '右侧海报二', resourceId: '1054'},
+        {title: '左侧海报三', resourceId: '1051'},
+        {title: '右侧海报三', resourceId: '1055'},
+        {title: '左侧海报四', resourceId: '1052'},
+        {title: '右侧海报四', resourceId: '1056'},
         {title: '中间海报上', resourceId: '967'},
-        {title: '中间海报下', resourceId: '968'},
+        {title: '中间海报下', resourceId: '1057'},
 
 
         // ---------------  海报（播放视频）  ---------------  //
