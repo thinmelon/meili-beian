@@ -196,10 +196,13 @@ function MoreModule() {
             if (this.focusPosX >= this.moreItemArray[this.focusPosY].length) {
                 this.focusPosX = this.moreItemArray[this.focusPosY].length - 1;
             }
+            return 0;
         } else if (this.focusPosY < 0) {
             this.focusPosY = 0;
+            return -1;
         } else {
             this.focusPosY = this.columnsPerPage - 1;
+            return -1;
         }
     };
 

@@ -46,7 +46,9 @@
             this.focusOut();
             switch (this.focusArea) {
                 case 4:
-                    this.more.moveX(direction);
+                    if (-1 === this.more.moveX(direction)) {
+                        this.changePage(direction);
+                    }
                     break;
                 case 5:
                     this.bar.moveX(direction, true);
